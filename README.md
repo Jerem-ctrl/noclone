@@ -1,12 +1,36 @@
 # Noclone
 
-**Copiez-nous. Vous n'y arriverez pas.**
+**Copiez-nous. Vous n’y arriverez pas.**
 
-Noclone est une banque en ligne virtuelle conçue pour lutter contre la fraude : elle propose un délai de sécurité annulable pour les virements, un coffre à retardement pour l’épargne, un code de détresse, une connexion par passkey sans mot de passe, ainsi qu’un démonstrateur de billet quantique qui ne peut être contrefait.
+Noclone est une banque en ligne **fictive**, conçue contre la fraude : chaque fonctionnalité répond à une arnaque précise.
 
-> Projet d’étudiants. Noclone ne constitue pas une véritable banque : le site ne travaille qu’avec des données fictives et ne vous demandera jamais de réels renseignements bancaires.
+> Projet étudiant. Noclone n’est pas une vraie banque : le site ne manipule que des données de démonstration et ne demande jamais de véritable information bancaire.
 
 Projet libre du cours **8WEB101 Conception et programmation de sites Web**, Université du Québec à Chicoutimi, automne 2026.
+
+## Fonctionnalités
+
+**Essentiel, démontré à la séance 14**
+
+1. Connexion par passkey, sans mot de passe.
+2. Délai de sécurité annulable sur les virements vers un nouveau bénéficiaire.
+3. Coffre à retardement pour l’épargne.
+4. Code de détresse ouvrant un compte factice.
+5. **Le Check** : deux amis se vérifient une fois en personne, en scannant le code Noclone l’un de l’autre. Ensuite, chaque demande d’argent envoyée sur Instagram ou Snapchat est signée par le téléphone de son auteur : un compte piraté ne peut plus rien réclamer.
+6. Démonstrateur de billet quantique : une contrefaçon est détectée.
+
+**Bonus, si le temps le permet**
+
+- **Quittes** : les dépenses entre amis checkés se règlent seules, sans virement ni relance.
+  - Les deux amis choisissent ensemble le rythme lors du Check : chaque semaine (par défaut), chaque jour, ou dès que le solde atteint un montant fixé.
+  - À chaque échéance, Noclone additionne les dettes dans les deux sens et ne transfère que la différence.
+  - « Payer maintenant » reste disponible à tout moment.
+  - Chaque dette est validée par le téléphone de la personne qui doit, dans la limite fixée lors du Check.
+  - Seules les dettes de plus de 24 heures sont réglées : chacune peut être contestée pendant ce délai.
+  - Les amis checkés à proximité sont détectés en Bluetooth (simulé dans la démonstration).
+- Ange gardien : un proche co-valide les virements inhabituels.
+- Journal d’accès : qui a consulté votre dossier.
+- « Est-ce vraiment nous ? » : vérification des appels de la banque.
 
 ## Équipe
 
@@ -14,13 +38,13 @@ Projet libre du cours **8WEB101 Conception et programmation de sites Web**, Univ
 | --- | --- | --- |
 | [Prénom A] [NOM A] | [@compte-a] | Coordination et documentation |
 | [Prénom B] [NOM B] | [@compte-b] | Référent technique |
-| Olwen CRAVILLY--MITAINE | [@Cravilly-Olwen](https://github.com/Cravilly-Olwen) | Conception et expérience utilisateur |
-| Jérémy GIRARD | [@Jerem-ctrl](https://github.com/Jerem-ctrl) | Intégration et qualité |
+| [Prénom C] [NOM C] | [@compte-c] | Conception et expérience utilisateur |
+| [Prénom D] [NOM D] | [@compte-d] | Intégration et qualité |
 
 ## Technologies
 
-- [WebAuthn (passkeys)](https://www.w3.org/TR/webauthn/) : connexion et validation des opérations sensibles, sans mot de passe (technologie explorée dans le cadre du projet)
-- [API QRNG de l’ANU](https://quantumnumbers.anu.edu.au) : nombres quantiques aléatoires pour le démonstrateur de billet quantique
+- [WebAuthn (passkeys)](https://www.w3.org/TR/webauthn/) : connexion, confirmation des opérations sensibles et signature des demandes d’argent entre amis, sans mot de passe (technologie explorée dans le cadre du projet)
+- [API QRNG de l’ANU](https://quantumnumbers.anu.edu.au) : nombres aléatoires d’origine quantique pour le démonstrateur de billet quantique
 - HTML, CSS et JavaScript, publiés avec GitHub Pages
 
 ## Documents
@@ -31,4 +55,4 @@ Projet libre du cours **8WEB101 Conception et programmation de sites Web**, Univ
 
 ## État du projet
 
-Proposition déposée le 8 octobre 2026, en cours de validation.
+Proposition déposée le 8 octobre 2026, en attente de validation.
