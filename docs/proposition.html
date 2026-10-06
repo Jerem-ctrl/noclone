@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<!--
+  Noclone : proposition de projet et plan de travail
+  8WEB101 Conception et programmation de sites Web, UQAC, automne 2026
+
+  Mode d'emploi rapide (détails dans docs/README.md)
+  - Les champs à compléter sont écrits entre crochets, par exemple [Prénom A].
+    Remplacez-les avec Ctrl+H dans VSCodium ; le bandeau jaune affiché à l'écran
+    indique combien il en reste. Il ne s'imprime jamais.
+  - Chaque membre a une lettre (a, b, c, d) qui fixe la couleur de sa carte :
+    class="membre membre--a".
+  - Les numéros de sections et de tableaux sont générés par le CSS (compteurs) :
+    ne les écrivez pas à la main.
+  - Aperçu : ouvrez ce fichier avec Live Preview, qui actualise la page à chaque enregistrement.
+-->
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noclone : proposition de projet et plan de travail (8WEB101)</title>
+  <meta name="description" content="Proposition de projet et plan de travail de Noclone, banque en ligne fictive conçue contre la fraude : délai de sécurité, coffre à retardement, code de détresse, passkeys et billet quantique. Projet libre du cours 8WEB101, UQAC, automne 2026.">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <!-- Image du pied de page : préchargée, sinon le navigateur peut l'oublier à l'impression -->
+  <link rel="preload" href="img/cartes-pied.svg" as="image" type="image/svg+xml">
+  <link rel="stylesheet" href="proposition.css">
+  <script src="proposition.js" defer></script>
+</head>
+<body>
+
+  <!-- Aide à la rédaction : visible à l'écran seulement, jamais imprimée (voir proposition.js) -->
+  <aside class="aide" aria-label="Aide à la rédaction" hidden>
+    <p><strong class="aide__nombre">0</strong> <span class="aide__texte">champ à compléter</span></p>
+    <button type="button" class="aide__bouton">Aller au suivant</button>
+  </aside>
+
+  <!-- ================================ COUVERTURE ================================ -->
+  <header class="couverture">
+    <!-- Photo de couverture : les cartes Noclone en diagonale (1700 × 2200 px, format de la page) -->
+    <img class="couverture__fond" src="img/couverture-cartes.jpg" width="1700" height="2200"
+         alt="Les cartes Noclone alignées en diagonale sur fond noir, de la carte noire à la carte en verre givré.">
+    <div class="couverture__cours">
+      <p>Université du Québec à Chicoutimi<br>Département d'informatique et de mathématique</p>
+      <p>8WEB101 Conception et programmation de sites Web<br>automne 2026</p>
+    </div>
+
+    <h1>Noclone</h1>
+    <p class="couverture__slogan">Copiez-nous.<br>Vous n'y arriverez pas.</p>
+    <p class="couverture__document">Projet libre&nbsp;: proposition de projet et plan de travail</p>
+
+    <dl class="couverture__infos">
+      <div>
+        <dt>Équipe</dt>
+        <dd>Olwen Cravilly-Mitaine<br>Jeremy Girard<br>Adam Benahmed<br>[Prénom D] [NOM D]</dd>
+      </div>
+      <div>
+        <dt>Présenté à</dt>
+        <dd>M. Damien Brun</dd>
+      </div>
+      <div>
+        <dt>Remis le</dt>
+        <dd><time datetime="2026-10-08">8 octobre 2026</time></dd>
+      </div>
+      <div>
+        <dt>Dépôt Git</dt>
+        <dd><a href="https://github.com/Jerem-ctrl/noclone">github.com/[compte]/noclone</a></dd>
+      </div>
+    </dl>
+  </header>
+
+  <main>
+
+    <!-- ============================ 1. ÉQUIPE ============================ -->
+    <section id="equipe" aria-labelledby="titre-equipe">
+      <h2 id="titre-equipe">Membres de l'équipe</h2>
+
+      <table class="tableau tableau--equipe">
+        <caption>Composition de l'équipe</caption>
+        <thead>
+          <tr>
+            <th scope="col">Prénom et nom</th>
+            <th scope="col">Courriel UQAC</th>
+            <th scope="col">Compte GitHub</th>
+            <th scope="col">Rôle et responsabilités</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="membre membre--a">[Prénom A] [NOM A]</span></th>
+            <td>[courriel A]</td>
+            <td>[@compte-a]</td>
+            <td><strong>Coordination et documentation</strong><br>
+              <span class="precision">Suivi des tâches, dépôts Moodle, README et Wiki</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="membre membre--b">[Prénom B] [NOM B]</span></th>
+            <td>[courriel B]</td>
+            <td>[@compte-b]</td>
+            <td><strong>Référent technique</strong><br>
+              <span class="precision">Passkeys, règles de sécurité, données</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="membre membre--c">[Prénom C] [NOM C]</span></th>
+            <td>[courriel C]</td>
+            <td>[@compte-c]</td>
+            <td><strong>Conception et expérience utilisateur</strong><br>
+              <span class="precision">Maquettes, prototype Penpot, charte, affiche</span></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="membre membre--d">[Prénom D] [NOM D]</span></th>
+            <td>[courriel D]</td>
+            <td>[@compte-d]</td>
+            <td><strong>Intégration et qualité</strong><br>
+              <span class="precision">Billet quantique, mise en ligne, tests</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========================= 2. IDÉE DU PROJET ========================= -->
+    <section id="idee" aria-labelledby="titre-idee">
+      <h2 id="titre-idee">Idée du projet</h2>
+
+      <h3>Nom du projet</h3>
+      <p><strong>Noclone</strong>, avec pour slogan «&nbsp;Copiez-nous. Vous n'y arriverez pas.&nbsp;» Le nom renvoie au théorème de non-clonage&nbsp;: en physique quantique, il est impossible de copier parfaitement un état inconnu. C'est la promesse de la banque&nbsp;: votre identité, vos accès et votre argent ne se dupliquent pas.</p>
+
+      <h3>Description</h3>
+      <p class="description">Noclone est une banque en ligne fictive qui place la lutte contre la fraude au cœur de chaque fonctionnalité. Un virement vers un nouveau bénéficiaire part avec un délai de sécurité annulable, l'épargne repose dans un coffre à retardement, et un code de détresse ouvre un faux compte presque vide si l'on vous force à ouvrir l'application. La connexion se fait par passkey, sans mot de passe à voler. Entre amis, le Check se fait une fois en personne&nbsp;: ensuite, chaque demande d'argent envoyée sur Instagram ou Snapchat est signée par le téléphone de son auteur, et un compte piraté ne peut plus rien réclamer. Enfin, un démonstrateur de billet quantique montre comment la physique rendra un jour la monnaie impossible à contrefaire.</p>
+
+      <aside class="encadre" aria-labelledby="titre-distingue">
+        <h4 id="titre-distingue">Ce qui distingue Noclone</h4>
+        <p>Chaque protection répond à une arnaque précise&nbsp;: le délai de sécurité au faux conseiller qui presse, le coffre à retardement au piratage du compte, le code de détresse à la contrainte, le Check au compte d'ami piraté. À notre connaissance, aucune banque ne réunit ces protections.</p>
+      </aside>
+      <p class="note">Noclone est une banque fictive&nbsp;: le site le signale sur chaque page et n'utilise que des données de démonstration.</p>
+
+      <h3>Fonctionnalités prioritaires</h3>
+      <div class="fonctionnalites">
+        <section>
+          <h4>Essentiel, démontré à la séance&nbsp;14</h4>
+          <ol>
+            <li>Connexion par passkey, sans mot de passe.</li>
+            <li>Délai de sécurité annulable sur les virements.</li>
+            <li>Coffre à retardement pour l'épargne.</li>
+            <li>Code de détresse ouvrant un compte factice.</li>
+            <li>Le Check&nbsp;: amis vérifiés en personne, demandes d'argent signées.</li>
+            <li>Billet quantique&nbsp;: une contrefaçon est détectée.</li>
+          </ol>
+        </section>
+        <section>
+          <h4>Bonus, si le temps le permet</h4>
+          <ul>
+            <li>Quittes&nbsp;: les dépenses entre amis checkés se règlent seules, au rythme choisi lors du Check.</li>
+            <li>Ange gardien&nbsp;: un proche co-valide les virements inhabituels.</li>
+            <li>Journal d'accès&nbsp;: qui a consulté votre dossier.</li>
+            <li>«&nbsp;Est-ce vraiment nous&nbsp;?&nbsp;»&nbsp;: vérification des appels de la banque.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- ======================= 3. TECHNOLOGIE CHOISIE ======================= -->
+    <section id="technologie" class="saut-de-page" aria-labelledby="titre-technologie">
+      <h2 id="titre-technologie">Technologie choisie</h2>
+
+      <h3>Nom et lien</h3>
+      <dl class="fiche">
+        <div>
+          <dt>Technologie explorée</dt>
+          <dd><strong>WebAuthn (passkeys)</strong>, <a href="https://www.w3.org/TR/webauthn/">w3.org/TR/webauthn</a><br>
+            Standard du W3C et de la FIDO Alliance pour s'authentifier par clé cryptographique, sans mot de passe.</dd>
+        </div>
+        <div>
+          <dt>Hasard quantique</dt>
+          <dd><strong>API QRNG de l'ANU</strong>, <a href="https://quantumnumbers.anu.edu.au">quantumnumbers.anu.edu.au</a><br>
+            Nombres aléatoires issus de la mesure des fluctuations du vide quantique, utilisés par le démonstrateur de billet quantique.</dd>
+        </div>
+      </dl>
+
+      <h3>Rôle dans le projet</h3>
+      <p>Avec WebAuthn, l'appareil de l'utilisateur crée une paire de clés propre à Noclone&nbsp;: la clé privée ne quitte jamais le téléphone ou la clé de sécurité, et chaque connexion est une signature liée à l'adresse du site. Un faux site ne peut donc rien obtenir, contrairement à un mot de passe ou à un code reçu par SMS. Nous l'utilisons pour la connexion, pour confirmer les opérations sensibles (annuler un délai, ouvrir le coffre) et pour signer les demandes d'argent entre amis&nbsp;: avec le Check, le téléphone du destinataire vérifie la signature produite par celui de l'expéditeur. Le site reste statique&nbsp;: publié sur GitHub Pages, il conserve les données de démonstration dans le navigateur. Cette technologie n'est pas abordée dans le cours&nbsp;; c'est elle que nous explorerons en profondeur.</p>
+
+      <h3>Alternatives envisagées</h3>
+      <table class="tableau tableau--alternatives">
+        <caption>Alternatives écartées</caption>
+        <colgroup>
+          <col class="col-alternative">
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Alternative</th>
+            <th scope="col">Pourquoi nous ne la retenons pas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Mot de passe et code par SMS</th>
+            <td>Hameçonnables, et vulnérables à l'échange frauduleux de carte SIM.</td>
+          </tr>
+          <tr>
+            <th scope="row">Codes à usage unique (<abbr title="Time-based One-Time Password">TOTP</abbr>)</th>
+            <td>Un faux site peut demander le code et le relayer en temps réel à la vraie banque.</td>
+          </tr>
+          <tr>
+            <th scope="row">Service clé en main (Auth0, Hanko)</th>
+            <td>Il masque le fonctionnement du protocole, que nous voulons comprendre et expliquer.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <aside class="encadre encadre--question" aria-labelledby="titre-question">
+        <h4 id="titre-question">Point à valider avec vous</h4>
+        <p>WebAuthn étant une interface du navigateur plutôt qu'une bibliothèque, nous souhaitons confirmer qu'elle répond à l'exigence d'explorer une technologie Web non expliquée en cours. Nous l'exploitons bien au-delà de la connexion&nbsp;: signature et vérification des demandes d'argent (le Check).</p>
+      </aside>
+    </section>
+
+    <!-- =========================== 4. DÉPÔT GIT =========================== -->
+    <section id="depot" aria-labelledby="titre-depot">
+      <h2 id="titre-depot">Dépôt Git</h2>
+
+      <p class="lien-depot"><a href="https://github.com/[compte]/noclone">https://github.com/[compte]/noclone</a></p>
+
+      <dl class="fiche">
+        <div>
+          <dt>Visibilité</dt>
+          <dd>Public, consultable sans compte GitHub.</dd>
+        </div>
+        <div>
+          <dt>Contenu actuel</dt>
+          <dd>README (nom, membres, technologie), Wiki initialisé pour notre journal d'apprentissage, tableau GitHub Projects avec une issue par tâche (T01 à T24) et cette proposition (<code>docs/proposition.html</code> et sa version PDF).</dd>
+        </div>
+        <div>
+          <dt>Convention</dt>
+          <dd>Chaque commit cite l'issue qu'il fait avancer, par exemple «&nbsp;Création du délai de sécurité (#14)&nbsp;».</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- ========================= 5. PLAN DE TRAVAIL ========================= -->
+    <section id="plan" class="saut-de-page" aria-labelledby="titre-plan">
+      <h2 id="titre-plan">Plan de travail</h2>
+
+      <h3>Jalons</h3>
+      <!-- La frise : une étape par séance. Un jalon (class="jalon") est marqué d'un losange ;
+           une semaine chargée (etape--chargee) est hachurée. -->
+      <figure class="frise">
+        <ol>
+          <li class="etape">
+            <span class="etape__seance">S6</span> <time datetime="2026-10-08">8 oct.</time>
+            <strong class="jalon">Proposition validée</strong>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">Relâche</span> <time datetime="2026-10-15">15 oct.</time>
+            <span class="activite">Exploration</span>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S7</span> <time datetime="2026-10-22">22 oct.</time>
+            <strong class="jalon">Preuve de concept</strong>
+          </li>
+          <li class="etape etape--chargee">
+            <span class="etape__seance">S8</span> <time datetime="2026-10-29">29 oct.</time>
+            <span class="activite">Fil-rouge</span>
+          </li>
+          <li class="etape etape--chargee">
+            <span class="etape__seance">S9</span> <time datetime="2026-11-05">5 nov.</time>
+            <span class="activite">Examen partiel</span>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S10</span> <time datetime="2026-11-12">12 nov.</time>
+            <strong class="jalon">Conception terminée</strong>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S11</span> <time datetime="2026-11-19">19 nov.</time>
+            <strong class="jalon">Version minimale</strong>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S12</span> <time datetime="2026-11-26">26 nov.</time>
+            <strong class="jalon">Essentiel terminé</strong>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S13</span> <time datetime="2026-12-03">3 déc.</time>
+            <strong class="jalon">Bêta en ligne</strong>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S14</span> <time datetime="2026-12-10">10 déc.</time>
+            <strong class="jalon jalon--cle">Démonstration</strong>
+          </li>
+          <li class="etape">
+            <span class="etape__seance">S15</span> <time datetime="2026-12-17">17 déc.</time>
+            <strong class="jalon">Affiche, vidéo</strong>
+            <span class="activite">Examen final</span>
+          </li>
+        </ol>
+        <figcaption>Le fil du projet&nbsp;: une étape par séance du jeudi, un losange par jalon, des hachures pour les semaines chargées.</figcaption>
+      </figure>
+
+      <h3>Tâches, responsables et échéances</h3>
+      <!-- Une ligne par tâche, un seul responsable. Pour changer de responsable,
+           changez la lettre de la carte de couleur (membre--a à membre--d) ET le prénom. -->
+      <table class="tableau tableau--taches" id="taches">
+        <caption>Tâches, responsables et échéances (S = séance)</caption>
+        <colgroup>
+          <col class="col-phase">
+          <col class="col-numero">
+          <col>
+          <col class="col-responsable">
+          <col class="col-echeance">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Phase</th>
+            <th scope="col">N<sup>o</sup></th>
+            <th scope="col">Tâche</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Échéance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" rowspan="3" class="phase">Mise en place</th>
+            <th scope="row">T01</th>
+            <td>Créer le dépôt, inviter l'équipe, rédiger le README</td>
+            <td><span class="membre membre--a">[Prénom A]</span></td>
+            <td class="echeance"><abbr title="Séance 6">S6</abbr> <time datetime="2026-10-08">8 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T02</th>
+            <td>Initialiser le Wiki et le tableau des tâches</td>
+            <td><span class="membre membre--a">[Prénom A]</span></td>
+            <td class="echeance"><abbr title="Séance 6">S6</abbr> <time datetime="2026-10-08">8 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T03</th>
+            <td>Préparer les données de démonstration (comptes fictifs)</td>
+            <td><span class="membre membre--b">[Prénom B]</span></td>
+            <td class="echeance"><abbr title="Séance 6">S6</abbr> <time datetime="2026-10-08">8 oct.</time></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" rowspan="4" class="phase">Exploration de la technologie</th>
+            <th scope="row">T04</th>
+            <td>Suivre les guides WebAuthn (créer et utiliser une passkey)</td>
+            <td><span class="membre membre--b">[Prénom B]</span></td>
+            <td class="echeance"><abbr title="Séance 7">S7</abbr> <time datetime="2026-10-22">22 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T05</th>
+            <td>Interroger l'API QRNG de l'ANU</td>
+            <td><span class="membre membre--d">[Prénom D]</span></td>
+            <td class="echeance"><abbr title="Séance 7">S7</abbr> <time datetime="2026-10-22">22 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T06</th>
+            <td>Preuve de concept&nbsp;: inscription et connexion par passkey</td>
+            <td><span class="membre membre--b">[Prénom B]</span></td>
+            <td class="echeance"><abbr title="Séance 7">S7</abbr> <time datetime="2026-10-22">22 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T07</th>
+            <td>Comparer passkeys, codes SMS et TOTP (base de la vidéo)</td>
+            <td><span class="membre membre--a">[Prénom A]</span></td>
+            <td class="echeance"><abbr title="Séance 7">S7</abbr> <time datetime="2026-10-22">22 oct.</time></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" rowspan="5" class="phase">Analyse et architecture</th>
+            <th scope="row">T08</th>
+            <td>Analyse des besoins et persona</td>
+            <td><span class="membre membre--c">[Prénom C]</span></td>
+            <td class="echeance"><abbr title="Séance 7">S7</abbr> <time datetime="2026-10-22">22 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T09</th>
+            <td>Scénarios d'arnaque et parcours de protection</td>
+            <td><span class="membre membre--d">[Prénom D]</span></td>
+            <td class="echeance"><abbr title="Séance 7">S7</abbr> <time datetime="2026-10-22">22 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T10</th>
+            <td>Maquettes fil de fer des écrans principaux</td>
+            <td><span class="membre membre--c">[Prénom C]</span></td>
+            <td class="echeance"><abbr title="Séance 8">S8</abbr> <time datetime="2026-10-29">29 oct.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T11</th>
+            <td>Modèle des données et règles de sécurité (délais, plafonds)</td>
+            <td><span class="membre membre--b">[Prénom B]</span></td>
+            <td class="echeance"><abbr title="Séance 10">S10</abbr> <time datetime="2026-11-12">12 nov.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T12</th>
+            <td>Charte graphique et prototype interactif Penpot</td>
+            <td><span class="membre membre--c">[Prénom C]</span></td>
+            <td class="echeance"><abbr title="Séance 10">S10</abbr> <time datetime="2026-11-12">12 nov.</time></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" rowspan="6" class="phase">Réalisation</th>
+            <th scope="row">T13</th>
+            <td>Tableau de bord du compte et historique</td>
+            <td><span class="membre membre--a">[Prénom A]</span></td>
+            <td class="echeance"><abbr title="Séance 11">S11</abbr> <time datetime="2026-11-19">19 nov.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T14</th>
+            <td>Virements, demandes d'argent et délai de sécurité annulable</td>
+            <td><span class="membre membre--c">[Prénom C]</span></td>
+            <td class="echeance"><abbr title="Séance 11">S11</abbr> <time datetime="2026-11-19">19 nov.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T15</th>
+            <td>Passkeys&nbsp;: connexion, confirmations et le Check</td>
+            <td><span class="membre membre--b">[Prénom B]</span></td>
+            <td class="echeance"><abbr title="Séance 11">S11</abbr> <time datetime="2026-11-19">19 nov.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T16</th>
+            <td>Coffre à retardement pour l'épargne</td>
+            <td><span class="membre membre--a">[Prénom A]</span></td>
+            <td class="echeance"><abbr title="Séance 12">S12</abbr> <time datetime="2026-11-26">26 nov.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T17</th>
+            <td>Code de détresse et compte factice</td>
+            <td><span class="membre membre--c">[Prénom C]</span></td>
+            <td class="echeance"><abbr title="Séance 12">S12</abbr> <time datetime="2026-11-26">26 nov.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T18</th>
+            <td>Démonstrateur de billet quantique</td>
+            <td><span class="membre membre--d">[Prénom D]</span></td>
+            <td class="echeance"><abbr title="Séance 12">S12</abbr> <time datetime="2026-11-26">26 nov.</time></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" rowspan="3" class="phase">Tests et mise en ligne</th>
+            <th scope="row">T19</th>
+            <td>Publication de la bêta et mode démonstration</td>
+            <td><span class="membre membre--d">[Prénom D]</span></td>
+            <td class="echeance"><abbr title="Séance 13">S13</abbr> <time datetime="2026-12-03">3 déc.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T20</th>
+            <td>Tests sur ordinateur et téléphone, accessibilité</td>
+            <td><span class="membre membre--d">[Prénom D]</span></td>
+            <td class="echeance"><abbr title="Séance 13">S13</abbr> <time datetime="2026-12-03">3 déc.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T21</th>
+            <td>Bonus&nbsp;: Quittes, ange gardien et journal d'accès</td>
+            <td><span class="membre membre--d">[Prénom D]</span></td>
+            <td class="echeance"><abbr title="Séance 13">S13</abbr> <time datetime="2026-12-03">3 déc.</time></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <th scope="rowgroup" rowspan="3" class="phase">Livrables finaux</th>
+            <th scope="row">T22</th>
+            <td>Scénario de démonstration et journal des commits clés</td>
+            <td><span class="membre membre--a">[Prénom A]</span></td>
+            <td class="echeance"><abbr title="Séance 14">S14</abbr> <time datetime="2026-12-10">10 déc.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T23</th>
+            <td>Vidéo de 10&nbsp;minutes&nbsp;: script, tournage, montage</td>
+            <td><span class="membre membre--b">[Prénom B]</span></td>
+            <td class="echeance"><abbr title="Séance 15">S15</abbr> <time datetime="2026-12-17">17 déc.</time></td>
+          </tr>
+          <tr>
+            <th scope="row">T24</th>
+            <td>Affiche format Lettre avec codes QR</td>
+            <td><span class="membre membre--c">[Prénom C]</span></td>
+            <td class="echeance"><abbr title="Séance 15">S15</abbr> <time datetime="2026-12-17">17 déc.</time></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- La répartition est recalculée automatiquement par proposition.js -->
+      <p class="note repartition">Répartition des tâches&nbsp;: <span class="repartition__valeurs">6&nbsp;tâches par membre</span>. Les rôles s'ajoutent au développement&nbsp;: chaque membre réalise au moins deux fonctionnalités de bout en bout.</p>
+
+      <h3 class="saut-de-page">Risques et solutions de repli</h3>
+      <table class="tableau tableau--risques">
+        <caption>Risques identifiés, de la technologie à la démonstration</caption>
+        <colgroup>
+          <col class="col-risque">
+          <col>
+          <col class="col-probabilite">
+          <col class="col-impact">
+          <col class="col-decision">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Risque (si…)</th>
+            <th scope="col">Solution de repli (alors…)</th>
+            <th scope="col">Probabilité</th>
+            <th scope="col">Impact</th>
+            <th scope="col">Décision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">WebAuthn s'avère plus difficile que prévu et la preuve de concept n'est pas prête.</th>
+            <td>On s'appuie sur la bibliothèque SimpleWebAuthn et on demande conseil au professeur.</td>
+            <td><span class="niveau niveau--moyen">Moyenne</span></td>
+            <td><span class="niveau niveau--eleve">Élevé</span></td>
+            <td><abbr title="Séance 7">S7</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Un navigateur ou un appareil de démonstration ne gère pas les passkeys.</th>
+            <td>Tests sur Chrome, Firefox, Safari et téléphone dès la preuve de concept&nbsp;; appareil de secours préparé pour la démonstration.</td>
+            <td><span class="niveau niveau--moyen">Moyenne</span></td>
+            <td><span class="niveau niveau--moyen">Moyen</span></td>
+            <td><abbr title="Séance 11">S11</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Vérifier dans le navigateur les signatures du Check s'avère trop complexe.</th>
+            <td>La vérification est simulée et expliquée dans le Wiki&nbsp;; l'échange des clés en personne par code QR est conservé.</td>
+            <td><span class="niveau niveau--moyen">Moyenne</span></td>
+            <td><span class="niveau niveau--moyen">Moyen</span></td>
+            <td><abbr title="Séance 11">S11</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Un site Web ne peut pas détecter en Bluetooth les amis checkés à proximité (Quittes).</th>
+            <td>La détection est décrite comme le fonctionnement de l'application réelle et simulée dans la démonstration (bouton «&nbsp;Ami à côté&nbsp;»).</td>
+            <td><span class="niveau niveau--eleve">Élevée</span></td>
+            <td><span class="niveau niveau--faible">Faible</span></td>
+            <td><abbr title="Séance 13">S13</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Sans serveur, la vérification des passkeys est incomplète et la sécurité paraît trompeuse.</th>
+            <td>Chaque limite est affichée dans l'interface et expliquée dans le Wiki&nbsp;; la vérification côté serveur est décrite comme évolution.</td>
+            <td><span class="niveau niveau--eleve">Élevée</span></td>
+            <td><span class="niveau niveau--moyen">Moyen</span></td>
+            <td><abbr title="Séance 7">S7</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Les vrais délais (24&nbsp;heures, 30&nbsp;jours) rendent la démonstration impossible.</th>
+            <td>Un mode démonstration accélère le temps (une minute pour un jour), clairement signalé.</td>
+            <td><span class="niveau niveau--eleve">Élevée</span></td>
+            <td><span class="niveau niveau--moyen">Moyen</span></td>
+            <td><abbr title="Séance 12">S12</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">L'API QRNG de l'ANU est indisponible ou son quota est dépassé.</th>
+            <td>Bascule sur le générateur du navigateur (<code>crypto.getRandomValues</code>), signalée à l'écran.</td>
+            <td><span class="niveau niveau--moyen">Moyenne</span></td>
+            <td><span class="niveau niveau--faible">Faible</span></td>
+            <td>Au besoin</td>
+          </tr>
+          <tr>
+            <th scope="row">Le démonstrateur de billet quantique est mal compris par le public.</th>
+            <td>Explication pas à pas, puis test auprès de deux personnes extérieures au cours.</td>
+            <td><span class="niveau niveau--moyen">Moyenne</span></td>
+            <td><span class="niveau niveau--moyen">Moyen</span></td>
+            <td><abbr title="Séance 13">S13</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Le site est confondu avec une vraie banque.</th>
+            <td>Mention «&nbsp;banque fictive&nbsp;» sur chaque page&nbsp;; aucune vraie donnée bancaire n'est jamais demandée.</td>
+            <td><span class="niveau niveau--faible">Faible</span></td>
+            <td><span class="niveau niveau--eleve">Élevé</span></td>
+            <td>En continu</td>
+          </tr>
+          <tr>
+            <th scope="row">Un membre devient indisponible ou abandonne le cours (date limite le 10&nbsp;novembre).</th>
+            <td>Ses tâches, documentées dans les issues, sont redistribuées et l'équipe se concentre sur l'essentiel.</td>
+            <td><span class="niveau niveau--faible">Faible</span></td>
+            <td><span class="niveau niveau--eleve">Élevé</span></td>
+            <td>En continu</td>
+          </tr>
+          <tr>
+            <th scope="row">Le fil-rouge (29&nbsp;octobre) et l'examen partiel (5&nbsp;novembre) saturent l'équipe.</th>
+            <td>Peu de tâches planifiées en S8 et S9&nbsp;; l'exploration de la technologie avance pendant la relâche.</td>
+            <td><span class="niveau niveau--eleve">Élevée</span></td>
+            <td><span class="niveau niveau--moyen">Moyen</span></td>
+            <td><abbr title="Séance 8">S8</abbr></td>
+          </tr>
+          <tr>
+            <th scope="row">Le site ne fonctionne pas le jour de la démonstration.</th>
+            <td>Vidéo de secours de la démonstration et répétition complète la veille.</td>
+            <td><span class="niveau niveau--faible">Faible</span></td>
+            <td><span class="niveau niveau--eleve">Élevé</span></td>
+            <td><abbr title="Séance 14">S14</abbr></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Décision&nbsp;: séance à laquelle nous appliquons la solution de repli si le risque se concrétise.</p>
+
+      <h3>Fonctionnement de l'équipe</h3>
+      <ul class="fonctionnement">
+        <li><strong>Communication.</strong> [canal de discussion] et point de 15&nbsp;minutes après le cours du jeudi, puis au TD du lundi dès le 2&nbsp;novembre.</li>
+        <li><strong>Git.</strong> <code>git pull</code> avant de travailler, commits petits et descriptifs, chacun avec son compte&nbsp;; jamais deux personnes sur le même fichier.</li>
+        <li><strong>Suivi.</strong> Chaque tâche est une issue qui avance dans le tableau GitHub Projects (à faire, en cours, terminé).</li>
+        <li><strong>Apprentissage.</strong> Chacun consigne dans le Wiki ce qu'il apprend sur WebAuthn, matière première de la vidéo.</li>
+      </ul>
+    </section>
+    <!-- ===================== 6. DIRECTION ARTISTIQUE ===================== -->
+    <section id="direction-artistique" class="saut-de-page" aria-labelledby="titre-da">
+      <h2 id="titre-da">Direction artistique</h2>
+      <p>Un seul style, le style Noclone&nbsp;: fond nuit, police Inter, petites mentions en Space Mono et une carte bancaire réaliste comme signature. À l'intérieur de ce cadre, chaque page du site choisit une couleur de carte et une mise en scène. Le site reste reconnaissable d'une page à l'autre, sans jamais se répéter.</p>
+
+      <h3>Douze couleurs de carte</h3>
+      <ul class="palettes">
+        <li><img src="img/cartes/cobalt.jpg" width="600" height="286" alt=""><strong>Cobalt</strong><code>#3A63F0</code></li>
+        <li><img src="img/cartes/orange.jpg" width="600" height="286" alt=""><strong>Orange brûlé</strong><code>#FF7A33</code></li>
+        <li><img src="img/cartes/emeraude.jpg" width="600" height="286" alt=""><strong>Émeraude</strong><code>#17A06D</code></li>
+        <li><img src="img/cartes/lavande.jpg" width="600" height="286" alt=""><strong>Lavande</strong><code>#CDBCFF</code></li>
+        <li><img src="img/cartes/corail.jpg" width="600" height="286" alt=""><strong>Corail</strong><code>#FF9378</code></li>
+        <li><img src="img/cartes/rose.jpg" width="600" height="286" alt=""><strong>Rose poudré</strong><code>#F7C9CF</code></li>
+        <li><img src="img/cartes/cuivre.jpg" width="600" height="286" alt=""><strong>Cuivre</strong><code>#F0B18A</code></li>
+        <li><img src="img/cartes/sauge.jpg" width="600" height="286" alt=""><strong>Sauge</strong><code>#C4DCC2</code></li>
+        <li><img src="img/cartes/glacier.jpg" width="600" height="286" alt=""><strong>Glacier</strong><code>#CBE8FF</code></li>
+        <li><img src="img/cartes/ambre.jpg" width="600" height="286" alt=""><strong>Ambre</strong><code>#FFD27A</code></li>
+        <li><img src="img/cartes/cerise.jpg" width="600" height="286" alt=""><strong>Cerise</strong><code>#FF4D6D</code></li>
+        <li><img src="img/cartes/lagon.jpg" width="600" height="286" alt=""><strong>Lagon</strong><code>#2FD3D9</code></li>
+      </ul>
+      <p class="note">Les couleurs du texte sont des versions éclaircies de ces teintes, toutes au-dessus du niveau AA des WCAG sur le fond nuit.</p>
+
+      <h3>Douze mises en scène, une par page du site</h3>
+      <div class="scenes">
+        <figure class="scene">
+          <img src="img/scenes/13-perspective.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Perspective&nbsp;» de la carte Noclone">
+          <figcaption><strong>Perspective</strong><span>Accueil</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/14-deux-cartes.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Deux cartes&nbsp;» de la carte Noclone">
+          <figcaption><strong>Deux cartes</strong><span>Le Check et Quittes</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/15-verticale.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Verticale en titane&nbsp;» de la carte Noclone">
+          <figcaption><strong>Verticale en titane</strong><span>Ouverture de compte</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/16-relief.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Gravée en relief&nbsp;» de la carte Noclone">
+          <figcaption><strong>Gravée en relief</strong><span>Ange gardien</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/17-givree.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Transparente&nbsp;» de la carte Noclone">
+          <figcaption><strong>Transparente</strong><span>Connexion par passkey</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/18-holographique.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Holographique&nbsp;» de la carte Noclone">
+          <figcaption><strong>Holographique</strong><span>Billet quantique</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/19-epaisseur.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Épaisseur&nbsp;» de la carte Noclone">
+          <figcaption><strong>Épaisseur</strong><span>Tableau de bord</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/20-reflet.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Reflet&nbsp;» de la carte Noclone">
+          <figcaption><strong>Reflet</strong><span>Journal d’accès</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/21-etui.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Dans son étui&nbsp;» de la carte Noclone">
+          <figcaption><strong>Dans son étui</strong><span>Coffre à retardement</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/22-application.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Dans l’application&nbsp;» de la carte Noclone">
+          <figcaption><strong>Dans l’application</strong><span>Virements et délai de sécurité</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/23-gros-plan.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Gros plan&nbsp;» de la carte Noclone">
+          <figcaption><strong>Gros plan</strong><span>Code de détresse</span></figcaption>
+        </figure>
+        <figure class="scene">
+          <img src="img/scenes/24-guilloche.jpg" width="480" height="398" alt="Mise en scène «&nbsp;Guilloché&nbsp;» de la carte Noclone">
+          <figcaption><strong>Guilloché</strong><span>«&nbsp;Est-ce vraiment nous&nbsp;?&nbsp;»</span></figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================================ COLOPHON ================================ -->
+  <footer class="colophon">
+    <img src="img/logo.svg" alt="" width="64" height="64">
+    <p>Document écrit en HTML et CSS, versionné dans notre dépôt (<code>docs/proposition.html</code>) et exporté en PDF depuis le navigateur. Polices libres Inter et Space Mono. Contrastes conformes au niveau AA des WCAG. Les cartes de la section&nbsp;6 sont modélisées et rendues en 3D avec three.js (<code>docs/3d/cartes-3d.html</code>), aux dimensions réelles d'une carte bancaire.</p>
+  </footer>
+
+</body>
+</html>
