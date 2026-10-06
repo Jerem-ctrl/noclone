@@ -1,0 +1,1102 @@
+/* ==========================================================================
+   Noclone : proposition de projet (8WEB101, projet libre)
+   Une seule feuille de style pour l'écran (rédaction) et l'impression (PDF).
+
+   1. Polices          5. Titres et texte        9.  Colophon
+   2. Charte graphique 6. Tableaux               10. Aide à la rédaction
+   3. Base             7. Composants             11. Écran
+   4. Couverture       8. Frise des jalons       12. Impression
+   ========================================================================== */
+
+
+/* 1. Polices ---------------------------------------------------------------
+   Hébergées dans le dépôt (dossier fonts/) : aucun appel à un service tiers,
+   rendu identique sur tous les ordinateurs. Licence SIL Open Font License.
+   Inter (titres et texte) et Space Mono (codes, chiffres, petites mentions). */
+
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-opsz-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("fonts/space-mono-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: url("fonts/space-mono-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+
+/* 2. Charte graphique --------------------------------------------------------
+   Le style Noclone : fond nuit, Inter, mentions en Space Mono et une carte
+   bancaire réaliste. Douze couleurs de carte (voir la section 6 du document) :
+   chaque section, chaque membre et chaque page du site en prend une.
+   Contrastes calculés sur le fond nuit (texte) et sur la surface (encadrés). */
+
+:root {
+  --nuit: #0f1014;          /* fond des pages */
+  --surface: #181a20;       /* encadrés, colonne des phases */
+  --trait: #2a2d35;         /* filets des tableaux */
+  --texte: #eef0f4;         /* texte courant (16,7:1) */
+  --gris: #a3a7b0;          /* texte secondaire (7,9:1) */
+
+  /* couleurs de texte, toutes au-dessus de 4,5:1 sur le fond nuit */
+  --cobalt: #8fb0ff;        /* 8,9:1 */
+  --orange: #ff9a5c;        /* 9,1:1 */
+  --emeraude: #5fe3ac;      /* 11,8:1 */
+  --lavande: #cbb8ff;       /* 10,7:1 */
+  --corail: #ff9a7e;        /* 9,2:1 */
+  --ambre: #ffc163;         /* 11,8:1 */
+  --cerise: #ff6d84;        /* 7,0:1 */
+  --lagon: #6fe0e6;         /* 12,0:1 */
+
+  /* les douze cartes (dégradés métallisés) */
+  --carte-cobalt: linear-gradient(140deg, #3a63f0, #1630a8 55%, #2a4fd6);
+  --carte-orange: linear-gradient(140deg, #ff7a33, #c94412 55%, #ef6420);
+  --carte-emeraude: linear-gradient(140deg, #17a06d, #0a5a3d 55%, #138a5e);
+  --carte-lavande: linear-gradient(140deg, #cdbcff, #8f78e0 55%, #b8a5ff);
+  --carte-corail: linear-gradient(140deg, #ff9378, #e0553c 55%, #ff7a5f);
+  --carte-rose: linear-gradient(140deg, #f7c9cf, #d98e9a 55%, #efb3bd);
+  --carte-cuivre: linear-gradient(140deg, #f0b18a, #9c5232 55%, #d9895f);
+  --carte-sauge: linear-gradient(140deg, #c4dcc2, #7f9e83 55%, #adc9ab);
+  --carte-glacier: linear-gradient(140deg, #cbe8ff, #7fb4e6 55%, #b2dcff);
+  --carte-ambre: linear-gradient(140deg, #ffd27a, #d48a1c 55%, #f5b347);
+  --carte-cerise: linear-gradient(140deg, #ff4d6d, #a3112f 55%, #e0294b);
+  --carte-lagon: linear-gradient(140deg, #2fd3d9, #0b7c8f 55%, #22b3c0);
+  --carte-encadre: linear-gradient(140deg, #2a4fd6, #1630a8 60%, #1e3fb8); /* blanc dessus : 7,4:1 */
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
+  --police-titres: "Inter", "Arial", sans-serif;
+  --police-texte: "Inter", "Arial", sans-serif;
+  --police-code: "Space Mono", "Courier New", monospace;
+
+  --filet: 0.3mm solid var(--trait);
+  --rayon: 1.2mm;
+  --mesure-texte: 74ch;     /* longueur de ligne confortable */
+  --marge-page: 20mm;
+
+  /* chaque section prend la couleur d'une carte (voir 5.) */
+  --accent: var(--cobalt);
+}
+
+
+/* 3. Base ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  -webkit-print-color-adjust: exact; /* conserve les couleurs de fond à l'impression */
+  print-color-adjust: exact;
+}
+
+html {
+  font-size: 9pt;
+}
+
+body {
+  margin: 0;
+  font-family: var(--police-texte);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--texte);
+  background: var(--nuit);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--cobalt);
+  text-decoration-thickness: 0.35mm;
+  text-underline-offset: 0.7mm;
+}
+
+abbr[title] {
+  text-decoration: none;
+}
+
+code {
+  font-family: var(--police-code);
+  font-size: 0.9em;
+  padding: 0 0.8mm;
+  border-radius: 0.6mm;
+  background: var(--surface);
+}
+
+strong {
+  font-weight: 650;
+}
+
+
+/* 4. Couverture --------------------------------------------------------------
+   Une photo pleine page : les cartes descendent en diagonale, du haut à gauche
+   vers le bas à droite. Le texte occupe les deux zones vides : le cours en haut
+   à droite, le titre et les informations en bas à gauche. */
+
+.couverture {
+  display: flex;
+  flex-direction: column;
+  height: 279mm;               /* hauteur d'une page Lettre (279,4 mm) */
+  padding: 16mm 18mm 15mm;
+  overflow: hidden;
+  position: relative;
+  background: var(--nuit);
+  break-after: page;
+}
+
+.couverture__fond {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.couverture > :not(.couverture__fond) {
+  position: relative;          /* le texte passe devant l'image */
+}
+
+.couverture__cours {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2mm;
+  text-align: right;
+  font-family: var(--police-code);
+  font-size: 7.5pt;
+  line-height: 1.6;
+  color: var(--gris);
+}
+
+.couverture__cours p {
+  margin: 0;
+}
+
+.couverture h1 {
+  margin: auto 0 0;
+  font-family: var(--police-titres);
+  font-size: 58pt;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  text-transform: lowercase;   /* le logotype s'écrit en minuscules */
+}
+
+.couverture__slogan {
+  max-width: 82mm;
+  margin: 4mm 0 0;
+  font-size: 14pt;
+  font-weight: 450;
+  letter-spacing: -0.01em;
+  color: var(--cobalt);
+}
+
+.couverture__document {
+  max-width: 82mm;
+  margin: 2mm 0 0;
+  font-size: 10pt;
+  color: var(--gris);
+}
+
+.couverture__infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm 6mm;
+  max-width: 82mm;
+  margin: 8mm 0 0;
+  padding-top: 5mm;
+  border-top: var(--filet);
+  font-size: 9pt;
+  line-height: 1.45;
+}
+
+.couverture__infos dt {
+  margin-bottom: 1mm;
+  font-family: var(--police-code);
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gris);
+}
+
+.couverture__infos dd {
+  margin: 0;
+}
+
+/* l'équipe et le dépôt prennent toute la largeur */
+.couverture__infos > div:first-child,
+.couverture__infos > div:last-child {
+  grid-column: 1 / -1;
+}
+
+
+/* 5. Titres et texte ---------------------------------------------------------
+   Numérotation automatique : sections (01, 02…), sous-sections (2.1…), tableaux.
+   Chaque section prend la couleur d'une carte pour ses numéros. */
+
+main {
+  counter-reset: section tableau;
+}
+
+main > section {
+  counter-increment: section;
+  counter-reset: sous-section;
+}
+
+main > section:nth-of-type(1) { --accent: var(--cobalt); }
+main > section:nth-of-type(2) { --accent: var(--orange); }
+main > section:nth-of-type(3) { --accent: var(--emeraude); }
+main > section:nth-of-type(4) { --accent: var(--lavande); }
+main > section:nth-of-type(5) { --accent: var(--corail); }
+main > section:nth-of-type(6) { --accent: var(--lagon); }
+
+main > section:nth-of-type(1) { --carte-section: var(--carte-cobalt); }
+main > section:nth-of-type(2) { --carte-section: var(--carte-orange); }
+main > section:nth-of-type(3) { --carte-section: var(--carte-emeraude); }
+main > section:nth-of-type(4) { --carte-section: var(--carte-lavande); }
+main > section:nth-of-type(5) { --carte-section: var(--carte-corail); }
+main > section:nth-of-type(6) { --carte-section: var(--carte-lagon); }
+
+main > section + section {
+  margin-top: 6mm;
+}
+
+/* Saut de page : ajoutez class="saut-de-page" sur un titre ou une section
+   pour qu'il commence une nouvelle page dans le PDF. */
+.saut-de-page {
+  break-before: page;
+  margin-top: 0;
+}
+
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  break-after: avoid;          /* jamais de titre seul en bas de page */
+}
+
+h2 {
+  margin: 0 0 3mm;
+  font-family: var(--police-titres);
+  font-size: 17pt;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+/* une mini carte de la couleur de la section, après le titre */
+h2::after {
+  content: "";
+  display: inline-block;
+  width: 1.05em;
+  height: 0.66em;
+  margin-left: 2.5mm;
+  border-radius: 0.1em;
+  vertical-align: 0.02em;
+  background: var(--carte-section, var(--carte-cobalt));
+  box-shadow: inset 0 0.05em 0 rgba(255, 255, 255, 0.3);
+}
+
+h2::before {
+  content: counter(section, decimal-leading-zero) "\00a0\00a0";
+  font-family: var(--police-code);
+  font-size: 0.8em;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+
+h3 {
+  counter-increment: sous-section;
+  margin: 3.8mm 0 1.4mm;
+  font-family: var(--police-texte);
+  font-size: 11.5pt;
+  font-weight: 650;
+}
+
+h3::before {
+  content: counter(section) "." counter(sous-section) "\00a0\00a0";
+  font-family: var(--police-code);
+  font-size: 0.9em;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+h4 {
+  margin: 0 0 1.5mm;
+  font-family: var(--police-texte);
+  font-size: 10pt;
+  font-weight: 650;
+}
+
+p {
+  max-width: var(--mesure-texte);
+  margin: 0 0 2mm;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  max-width: var(--mesure-texte);
+  margin: 0 0 2.5mm;
+  padding-left: 5mm;
+}
+
+li {
+  margin-bottom: 0.6mm;
+}
+
+li::marker {
+  font-family: var(--police-code);
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+.note {
+  font-size: 8.5pt;
+  color: var(--gris);
+}
+
+
+/* 6. Tableaux ---------------------------------------------------------------- */
+
+.tableau {
+  width: 100%;
+  margin: 1mm 0 3mm;
+  border-collapse: collapse;
+  font-size: 8pt;
+  line-height: 1.3;
+}
+
+.tableau caption {
+  counter-increment: tableau;
+  caption-side: top;
+  padding-bottom: 1.5mm;
+  font-size: 8.5pt;
+  text-align: left;
+  color: var(--gris);
+}
+
+.tableau caption::before {
+  content: "Tableau " counter(tableau) "\00a0\00a0";
+  font-family: var(--police-code);
+  font-weight: 700;
+  color: var(--texte);
+}
+
+.tableau thead {
+  display: table-header-group; /* l'en-tête se répète sur chaque page */
+}
+
+.tableau thead th {
+  padding: 1.2mm 2mm;
+  font-family: var(--police-code);
+  font-size: 7pt;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--gris);
+  border-bottom: 0.4mm solid var(--texte);
+}
+
+.tableau tbody th,
+.tableau td {
+  padding: 0.9mm 1.8mm;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: var(--filet);
+}
+
+.tableau tbody th {
+  font-weight: 650;
+}
+
+.tableau tr {
+  break-inside: avoid;         /* une ligne n'est jamais coupée entre deux pages */
+}
+
+/* Colonne « Phase » fusionnée sur plusieurs lignes (rowspan) */
+.tableau .phase {
+  font-weight: 650;
+  line-height: 1.25;
+  background: var(--surface);
+  border-bottom: 0.3mm solid var(--nuit);
+}
+
+.tableau--taches tbody + tbody {
+  border-top: 0.4mm solid var(--gris);
+}
+
+/* Largeurs des colonnes */
+.tableau--alternatives,
+.tableau--taches,
+.tableau--risques {
+  table-layout: fixed;
+}
+
+.col-alternative { width: 42mm; }
+.col-phase       { width: 24mm; }
+.col-numero      { width: 11mm; }
+.col-responsable { width: 27mm; }
+.col-echeance    { width: 24mm; }
+.col-risque      { width: 58mm; }
+.col-probabilite { width: 20mm; }
+.col-impact      { width: 17mm; }
+.col-decision    { width: 18mm; }
+
+.tableau--risques td:nth-child(3),
+.tableau--risques td:nth-child(4) {
+  padding-inline: 1.5mm;
+}
+
+/* Codes, séances et dates : chiffres de Space Mono, tous de la même largeur */
+.tableau--taches tbody th[scope="row"],
+.echeance,
+.tableau--risques td:last-child,
+.etape time,
+.couverture__infos dd time {
+  font-family: var(--police-code);
+  font-size: 0.92em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tableau--taches tbody th[scope="row"] {
+  font-weight: 400;
+  color: var(--gris);
+}
+
+.tableau--risques tbody th {
+  font-weight: 400;
+}
+
+.echeance {
+  white-space: nowrap;
+}
+
+.echeance abbr {
+  margin-right: 1mm;
+  font-weight: 700;
+}
+
+.echeance time {
+  color: var(--gris);
+}
+
+
+/* 7. Composants -------------------------------------------------------------- */
+
+/* Chaque membre a sa carte de couleur (la couleur seule ne porte jamais
+   l'information : le prénom est toujours écrit à côté) */
+.membre {
+  white-space: nowrap;
+}
+
+.membre::before {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  height: 0.76em;              /* une mini carte bancaire */
+  margin-right: 0.5em;
+  border-radius: 0.14em;
+  vertical-align: -0.06em;
+  background: var(--couleur-membre, var(--gris));
+  box-shadow: inset 0 0.05em 0 rgba(255, 255, 255, 0.3);
+}
+
+.membre--a { --couleur-membre: var(--carte-cobalt); }
+.membre--b { --couleur-membre: var(--carte-emeraude); }
+.membre--c { --couleur-membre: var(--carte-orange); }
+.membre--d { --couleur-membre: var(--carte-lavande); }
+
+/* Niveau de probabilité ou d'impact : texte + couleur */
+.niveau {
+  display: inline-block;
+  padding: 0.2mm 1.6mm;
+  border: 0.3mm solid;
+  border-radius: 0.6mm;
+  font-family: var(--police-code);
+  font-size: 7pt;
+  white-space: nowrap;
+}
+
+.niveau--eleve {
+  color: var(--nuit);
+  background: var(--cerise);   /* nuit sur cerise : 7,0:1 */
+  border-color: var(--cerise);
+}
+
+.niveau--moyen {
+  color: var(--ambre);
+  border-color: var(--ambre);
+}
+
+.niveau--faible {
+  color: var(--gris);
+  border-color: var(--trait);
+}
+
+/* Encadrés : une barre aux couleurs des quatre cartes sur le bord gauche */
+.encadre {
+  position: relative;
+  max-width: var(--mesure-texte);
+  margin: 2.5mm 0;
+  padding: 3mm 4mm 3mm 6mm;
+  border-radius: var(--rayon);
+  background: var(--surface);
+  break-inside: avoid;
+}
+
+.encadre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1.4mm;
+  border-radius: var(--rayon) 0 0 var(--rayon);
+  background: linear-gradient(var(--cobalt), var(--orange), var(--emeraude), var(--lavande));
+}
+
+.encadre p:last-child {
+  margin-bottom: 0;
+}
+
+.encadre--question {
+  padding-right: 20mm;
+  color: #ffffff;
+  background:                  /* une carte cobalt, avec sa puce */
+    url("img/puce.svg") right 5mm top 4mm / 10mm auto no-repeat,
+    var(--grain),
+    var(--carte-encadre);
+}
+
+.encadre--question::before {
+  display: none;
+}
+
+/* Fiches (listes de définitions sur deux colonnes) */
+.fiche {
+  display: grid;
+  grid-template-columns: 36mm 1fr;
+  gap: 2.5mm 5mm;
+  max-width: calc(var(--mesure-texte) + 41mm);
+  margin: 0 0 2.5mm;
+}
+
+.fiche > div {
+  display: contents;
+}
+
+.fiche dt {
+  font-family: var(--police-code);
+  font-size: 8pt;
+  color: var(--gris);
+  padding-top: 0.3mm;
+}
+
+.fiche dd {
+  margin: 0;
+}
+
+.lien-depot a {
+  font-family: var(--police-code);
+  font-size: 13pt;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+/* Fonctionnalités : essentiel et bonus côte à côte */
+.fonctionnalites {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8mm;
+}
+
+.fonctionnalites ol,
+.fonctionnalites ul {
+  margin-bottom: 0;
+}
+
+.fonctionnalites h4 {
+  padding-bottom: 1mm;
+  border-bottom: 0.5mm solid var(--accent);
+}
+
+.fonctionnalites section:last-child h4 {
+  border-bottom-color: var(--gris);
+}
+
+/* Précision sous un intitulé (responsabilités d'un rôle) */
+.precision {
+  font-size: 8.5pt;
+  color: var(--gris);
+}
+
+/* Fonctionnement de l'équipe : quatre règles en deux colonnes */
+.fonctionnement {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2mm 8mm;
+  max-width: none;
+  padding-left: 4mm;
+}
+
+.fonctionnement li {
+  margin: 0;
+}
+
+
+/* 8. Frise des jalons -----------------------------------------------------------
+   Chaque <li> est une séance : numéro et date en haut, fil au milieu,
+   libellé en bas. Le fil passe par les couleurs des cartes de la première à la dernière séance.
+   Un losange marque un jalon ; une zone hachurée, une semaine chargée. */
+
+.frise {
+  margin: 2mm 0 4mm;
+  break-inside: avoid;
+}
+
+.frise ol {
+  --haut-entete: 8.5mm;                     /* zone séance + date */
+  --y-fil: calc(var(--haut-entete) + 3mm);  /* position du fil */
+
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background:
+    linear-gradient(90deg, var(--cobalt), var(--orange), var(--emeraude), var(--lavande), var(--corail))
+    0 calc(var(--y-fil) - 0.4mm) / 100% 0.8mm no-repeat;
+}
+
+.etape {
+  position: relative;
+  margin: 0;
+  padding: calc(var(--y-fil) + 4.5mm) 0.4mm 0;
+  font-size: 7pt;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* une graduation à la fin de chaque séance */
+.etape::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--y-fil) - 1.4mm);
+  right: 0;
+  width: 0.3mm;
+  height: 2.8mm;
+  background: var(--gris);
+}
+
+/* semaine chargée : le fil traverse une zone hachurée */
+.etape--chargee::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--y-fil) - 2mm);
+  left: 0;
+  right: 0;
+  height: 4mm;
+  background: repeating-linear-gradient(-45deg, var(--gris) 0 0.3mm, transparent 0.3mm 1.1mm);
+  opacity: 0.6;
+}
+
+.etape__seance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-family: var(--police-code);
+  font-size: 8pt;
+  font-weight: 700;
+}
+
+.etape time {
+  position: absolute;
+  top: 3.8mm;
+  font-size: 6.3pt;
+  left: 0;
+  right: 0;
+  color: var(--gris);
+}
+
+/* un losange par jalon */
+.jalon {
+  display: block;
+  font-weight: 650;
+}
+
+.jalon::before {
+  content: "";
+  position: absolute;
+  top: var(--y-fil);
+  left: 50%;
+  width: 2.6mm;
+  height: 2.6mm;
+  background: var(--texte);
+  box-shadow: 0 0 0 0.7mm var(--nuit);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.jalon--cle::before {                     /* la démonstration : jalon décisif */
+  width: 3.8mm;
+  height: 3.8mm;
+  background: var(--orange);
+}
+
+.activite {
+  display: block;
+  color: var(--gris);
+}
+
+.frise figcaption {
+  max-width: var(--mesure-texte);
+  margin-top: 1.5mm;
+  font-size: 8.5pt;
+  color: var(--gris);
+}
+
+
+/* 8 bis. Direction artistique (section 6) ---------------------------------------- */
+
+.palettes {
+  display: grid;
+  max-width: none;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4mm 3mm;
+  margin: 2mm 0 3mm;
+  padding: 0;
+  list-style: none;
+}
+
+.palettes li {
+  margin: 0;
+  font-size: 7.5pt;
+  line-height: 1.3;
+}
+
+.palettes img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1mm;
+}
+
+.palettes strong {
+  display: block;
+  font-weight: 600;
+}
+
+.palettes code {
+  padding: 0;
+  font-size: 6.5pt;
+  color: var(--gris);
+  background: none;
+}
+
+.scenes {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4mm 3mm;
+  margin: 2mm 0 0;
+}
+
+.scene {
+  margin: 0;
+  font-size: 7pt;
+  line-height: 1.3;
+  break-inside: avoid;
+}
+
+.scene img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.5mm;
+  border-radius: var(--rayon);
+}
+
+.scene figcaption strong {
+  display: block;
+  font-weight: 600;
+}
+
+.scene figcaption span {
+  color: var(--gris);
+}
+
+
+/* 9. Colophon ------------------------------------------------------------------ */
+
+.colophon {
+  display: flex;
+  gap: 4mm;
+  align-items: flex-start;
+  margin-top: 6mm;
+  padding-top: 3.5mm;
+  border-top: var(--filet);
+  font-size: 8pt;
+  line-height: 1.45;
+  color: var(--gris);
+  break-inside: avoid;
+}
+
+.colophon img {
+  flex: none;
+  width: 9mm;
+  height: 9mm;
+}
+
+.colophon p {
+  margin: 0;
+}
+
+
+/* 10. Aide à la rédaction (écran seulement) ---------------------------------------
+   Les champs [entre crochets] sont surlignés par proposition.js. Le surlignage
+   reste visible à l'impression : un oubli se voit donc aussi dans le PDF. */
+
+.aide {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4mm;
+  padding: 2.5mm 4mm;
+  font-size: 11pt;
+  color: var(--nuit);
+  background: var(--ambre);
+}
+
+.aide[hidden] {
+  display: none;
+}
+
+.aide p {
+  margin: 0;
+}
+
+.aide__bouton {
+  padding: 1mm 4mm;
+  font: inherit;
+  font-weight: 700;
+  color: var(--texte);
+  background: var(--nuit);
+  border: 0;
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.aide__bouton:hover {
+  background: #333;
+}
+
+.aide__bouton:focus-visible {
+  outline: 0.7mm solid var(--nuit);
+  outline-offset: 0.7mm;
+}
+
+mark.todo {
+  padding: 0 0.6mm;
+  border-radius: 0.6mm;
+  color: var(--nuit);
+  background: var(--ambre);
+  outline: 0.3mm dashed var(--nuit);
+  outline-offset: -0.3mm;
+}
+
+
+/* 11. Écran ---------------------------------------------------------------------
+   Aperçu fidèle au PDF : mêmes dimensions (format Lettre) et mêmes tailles de texte.
+   Zoomez avec Ctrl + molette si le texte vous paraît petit. */
+
+@media screen {
+  html {
+    background: #1c1c1e;
+  }
+
+  body {
+    max-width: 215.9mm;
+    margin: 0 auto;
+    padding-bottom: 12mm;
+    background: none;
+  }
+
+  .couverture {
+    margin-bottom: 8mm;
+  }
+
+  main,
+  .colophon {
+    padding-inline: var(--marge-page);
+    background: var(--nuit);
+  }
+
+  main {
+    padding-top: var(--marge-page);
+  }
+
+  .colophon {
+    margin-top: 0;
+    padding-top: 8mm;
+    padding-bottom: var(--marge-page);
+    border-top: none;
+  }
+}
+
+/* Petits écrans : lecture sur téléphone */
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 11pt;
+  }
+
+  .couverture {
+    height: auto;
+    min-height: 100vh;
+    padding: 8mm 6mm;
+  }
+
+  .couverture h1 {
+    font-size: 44pt;
+  }
+
+  .palettes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .scenes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .couverture__cours,
+  .couverture__infos,
+  .fonctionnalites,
+  .fonctionnement {
+    display: block;
+  }
+
+  .couverture__cours p:last-child {
+    text-align: left;
+    margin-top: 2mm;
+  }
+
+  .couverture__infos > div {
+    margin-bottom: 4mm;
+  }
+
+  main,
+  .colophon {
+    padding-inline: 4mm;
+  }
+
+  .tableau {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .frise {
+    overflow-x: auto;
+  }
+
+  .frise ol {
+    min-width: 170mm;
+  }
+}
+
+
+/* 12. Impression ------------------------------------------------------------------
+   Format Lettre, en-têtes et pieds de page dans les marges, numéros de page,
+   et les douze cartes au centre du pied de chaque page intérieure. */
+
+@page {
+  size: letter;
+  margin: 18mm 20mm 16mm;
+  background: #0f1014;
+
+  @top-left {
+    content: "noclone";
+    vertical-align: bottom;
+    padding-bottom: 4.5mm;
+    font-family: "Inter", sans-serif;
+    font-size: 10pt;
+    font-weight: 650;
+    letter-spacing: -0.04em;
+    color: #eef0f4;
+  }
+
+  @top-right {
+    content: "Proposition de projet et plan de travail";
+    vertical-align: bottom;
+    padding-bottom: 4.5mm;
+    font-family: "Inter", sans-serif;
+    font-size: 8pt;
+    color: #a3a7b0;
+  }
+
+  @bottom-left {
+    content: "8WEB101, groupe 11, automne 2026";
+    width: 55mm;
+    vertical-align: top;
+    padding-top: 4.5mm;
+    font-family: "Space Mono", monospace;
+    font-size: 7.5pt;
+    color: #a3a7b0;
+  }
+
+  @bottom-center {
+    content: "";
+    background: url("img/cartes-pied.svg") center 5mm / 34mm 1.6mm no-repeat;
+  }
+
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    width: 55mm;
+    text-align: right;
+    vertical-align: top;
+    padding-top: 4.5mm;
+    font-family: "Space Mono", monospace;
+    font-size: 7.5pt;
+    color: #a3a7b0;
+  }
+}
+
+/* La couverture : pleine page, sans marges ni en-têtes */
+@page :first {
+  margin: 0;
+
+  @top-left      { content: none; }
+  @top-right     { content: none; }
+  @bottom-left   { content: none; }
+  @bottom-center { content: none; }
+  @bottom-right  { content: none; }
+}
+
+@media print {
+  html,
+  body {
+    background: none;
+  }
+
+  .aide {
+    display: none !important;
+  }
+
+}
