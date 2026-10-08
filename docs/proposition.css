@@ -12,12 +12,29 @@
 /* 1. Polices ---------------------------------------------------------------
    Hébergées dans le dépôt (dossier fonts/) : aucun appel à un service tiers,
    rendu identique sur tous les ordinateurs. Licence SIL Open Font License.
-   Inter (titres et texte) et Space Mono (codes, chiffres, petites mentions). */
+   Inter (titres et texte) et Space Mono (codes, chiffres, petites mentions).
+   Graisses fixes (400, 600, 700) plutôt qu'une police variable : le PDF reste léger. */
 
 @font-face {
   font-family: "Inter";
-  src: url("fonts/inter-latin-opsz-normal.woff2") format("woff2");
-  font-weight: 100 900;
+  src: url("fonts/inter-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/inter-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-display: block;
 }
@@ -76,6 +93,14 @@
   --carte-cerise: linear-gradient(140deg, #ff4d6d, #a3112f 55%, #e0294b);
   --carte-lagon: linear-gradient(140deg, #2fd3d9, #0b7c8f 55%, #22b3c0);
   --carte-encadre: linear-gradient(140deg, #2a4fd6, #1630a8 60%, #1e3fb8); /* blanc dessus : 7,4:1 */
+
+  /* teintes pleines, pour les petites pastilles (un dégradé par pastille alourdirait le PDF) */
+  --plein-cobalt: #2a4fd6;
+  --plein-orange: #ef6420;
+  --plein-emeraude: #138a5e;
+  --plein-lavande: #b8a5ff;
+  --plein-corail: #ff7a5f;
+  --plein-lagon: #22b3c0;
   --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 
   --police-titres: "Inter", "Arial", sans-serif;
@@ -138,7 +163,7 @@ code {
 }
 
 strong {
-  font-weight: 650;
+  font-weight: 600;
 }
 
 
@@ -190,7 +215,7 @@ strong {
   margin: auto 0 0;
   font-family: var(--police-titres);
   font-size: 58pt;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1;
   letter-spacing: -0.055em;
   text-transform: lowercase;   /* le logotype s'écrit en minuscules */
@@ -200,7 +225,7 @@ strong {
   max-width: 82mm;
   margin: 4mm 0 0;
   font-size: 14pt;
-  font-weight: 450;
+  font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--cobalt);
 }
@@ -264,12 +289,12 @@ main > section:nth-of-type(4) { --accent: var(--lavande); }
 main > section:nth-of-type(5) { --accent: var(--corail); }
 main > section:nth-of-type(6) { --accent: var(--lagon); }
 
-main > section:nth-of-type(1) { --carte-section: var(--carte-cobalt); }
-main > section:nth-of-type(2) { --carte-section: var(--carte-orange); }
-main > section:nth-of-type(3) { --carte-section: var(--carte-emeraude); }
-main > section:nth-of-type(4) { --carte-section: var(--carte-lavande); }
-main > section:nth-of-type(5) { --carte-section: var(--carte-corail); }
-main > section:nth-of-type(6) { --carte-section: var(--carte-lagon); }
+main > section:nth-of-type(1) { --carte-section: var(--plein-cobalt); }
+main > section:nth-of-type(2) { --carte-section: var(--plein-orange); }
+main > section:nth-of-type(3) { --carte-section: var(--plein-emeraude); }
+main > section:nth-of-type(4) { --carte-section: var(--plein-lavande); }
+main > section:nth-of-type(5) { --carte-section: var(--plein-corail); }
+main > section:nth-of-type(6) { --carte-section: var(--plein-lagon); }
 
 main > section + section {
   margin-top: 6mm;
@@ -293,7 +318,7 @@ h2 {
   margin: 0 0 3mm;
   font-family: var(--police-titres);
   font-size: 17pt;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.035em;
 }
 
@@ -306,8 +331,7 @@ h2::after {
   margin-left: 2.5mm;
   border-radius: 0.1em;
   vertical-align: 0.02em;
-  background: var(--carte-section, var(--carte-cobalt));
-  box-shadow: inset 0 0.05em 0 rgba(255, 255, 255, 0.3);
+  background: var(--carte-section, var(--plein-cobalt));
 }
 
 h2::before {
@@ -324,7 +348,7 @@ h3 {
   margin: 3.8mm 0 1.4mm;
   font-family: var(--police-texte);
   font-size: 11.5pt;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 h3::before {
@@ -339,7 +363,7 @@ h4 {
   margin: 0 0 1.5mm;
   font-family: var(--police-texte);
   font-size: 10pt;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 p {
@@ -422,7 +446,7 @@ li::marker {
 }
 
 .tableau tbody th {
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .tableau tr {
@@ -431,7 +455,7 @@ li::marker {
 
 /* Colonne « Phase » fusionnée sur plusieurs lignes (rowspan) */
 .tableau .phase {
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1.25;
   background: var(--surface);
   border-bottom: 0.3mm solid var(--nuit);
@@ -514,13 +538,12 @@ li::marker {
   border-radius: 0.14em;
   vertical-align: -0.06em;
   background: var(--couleur-membre, var(--gris));
-  box-shadow: inset 0 0.05em 0 rgba(255, 255, 255, 0.3);
 }
 
-.membre--a { --couleur-membre: var(--carte-cobalt); }
-.membre--b { --couleur-membre: var(--carte-emeraude); }
-.membre--c { --couleur-membre: var(--carte-orange); }
-.membre--d { --couleur-membre: var(--carte-lavande); }
+.membre--a { --couleur-membre: var(--plein-cobalt); }
+.membre--b { --couleur-membre: var(--plein-emeraude); }
+.membre--c { --couleur-membre: var(--plein-orange); }
+.membre--d { --couleur-membre: var(--plein-lavande); }
 
 /* Niveau de probabilité ou d'impact : texte + couleur */
 .niveau {
@@ -580,7 +603,6 @@ li::marker {
   color: #ffffff;
   background:                  /* une carte cobalt, avec sa puce */
     url("img/puce.svg") right 5mm top 4mm / 10mm auto no-repeat,
-    var(--grain),
     var(--carte-encadre);
 }
 
@@ -739,7 +761,7 @@ li::marker {
 /* un losange par jalon */
 .jalon {
   display: block;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .jalon::before {
@@ -1037,7 +1059,7 @@ mark.todo {
     padding-bottom: 4.5mm;
     font-family: "Inter", sans-serif;
     font-size: 10pt;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: -0.04em;
     color: #eef0f4;
   }
@@ -1100,3 +1122,14 @@ mark.todo {
   }
 
 }
+
+/* Page 2 (équipe et idée du projet) : espacements un peu resserrés
+   pour que les fonctionnalités tiennent sur la même page. */
+#equipe h2,
+#idee h2 { margin-bottom: 2mm; }
+#equipe .tableau td,
+#equipe .tableau tbody th { padding-block: 0.7mm; }
+#idee { margin-top: 4mm; }
+#idee h3 { margin-top: 2.8mm; }
+#idee p { margin-bottom: 1.5mm; }
+#idee .encadre { margin: 2mm 0; padding-block: 2.5mm; }
